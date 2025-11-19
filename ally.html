@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ally Feed | UmojaSafe</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="css/style.css">
+    
+    <!-- CRITICAL: Load App logic -->
+    <script type="module" src="js/app.js"></script>
+    
+    <script type="module">
+        import { checkAuth, handleLogout } from './js/auth.js';
+        import { initAllyFeed } from './js/app.js'; 
+        
+        window.onload = () => {
+            checkAuth();
+            initAllyFeed(); // Start the feed listener if Auth check passes
+            
+            // Attach event listener for the logout button
+            document.getElementById('logoutButton').addEventListener('click', handleLogout);
+        };
+    </script>
+</head>
+<body class="bg-gray-100 min-h-screen">
+
+    <nav class="bg-purple-700 text-white p-4 shadow-lg sticky top-0 z-10">
+        <div class="max-w-md mx-auto flex justify-between items-center">
+            <a href="index.html" class="font-bold text-lg flex items-center gap-2">
+                🛡️ UmojaSafe
+            </a>
+            <div class="flex items-center gap-3">
+                <span class="text-xs text-purple-200 hidden sm:block">Ally: <span class="user-email font-bold">...</span></span>
+                <!-- Updated button to be part of Feature 3 logic later, but keeping ID for now for simplicity -->
+                <button id="logoutButton" class="bg-white text-purple-700 text-xs font-bold px-3 py-1 rounded-lg hover:bg-gray-200 transition">Logout</button>
+            </div>
+        </div>
+    </nav>
+
+    <main class="max-w-md mx-auto mt-6 p-4">
+        <div class="flex justify-between items-center mb-6">
+            <h2 class="text-xl font-bold text-gray-800">Live Incidents</h2>
+            <span class="text-xs text-gray-500">Prioritized by urgency</span>
+        </div>
+
+        <!-- Feeds appear here via JS -->
+        <div id="feedContainer" class="space-y-4 pb-20">
+            <div class="text-center mt-10">
+                <div class="animate-spin rounded-full h-8 w-8 border-b-2 border-purple-700 mx-auto"></div>
+                <p class="text-gray-400 text-sm mt-2">Connecting to secure network...</p>
+            </div>
+        </div>
+    </main>
+
+</body>
+</html>

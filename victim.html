@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Request Support | UmojaSafe</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="css/style.css">
+    
+    <!-- CRITICAL: Load App logic -->
+    <script type="module" src="js/app.js"></script>
+    
+    <script type="module">
+        // Import the necessary functions
+        import { checkAuth, handleLogout } from './js/auth.js'; 
+        import { sendFlare, initVictimStatusListener } from './js/app.js'; // Import new functions
+        
+        window.onload = () => {
+            checkAuth();
+            initVictimStatusListener(); // <-- NEW: Start the status listener
+            
+            // Attach event listener for the logout button
+            document.getElementById('logoutButton').addEventListener('click', handleLogout);
+            
+            // Attach event listener for the flare button
+            document.getElementById('sendFlareButton').addEventListener('click', sendFlare);
+            
+            // Close modal button for the literacy modal
+            document.getElementById('closeModalButton').addEventListener('click', () => {
+                document.getElementById('literacyModal').classList.add('hidden');
+                document.getElementById('literacyModal').classList.remove('flex');
+            });
+        };
+    </script>
+</head>
+<body class="bg-gray-50 min-h-screen">
+
+    <nav class="bg-white shadow-sm p-4 flex justify-between items-center">
+        <a href="index.html" class="font-bold text-purple-700 flex items-center gap-2">
+            <span>🚨</span> Flare Hub
+        </a>
+        <div class="flex items-center gap-4">
+            <span class="text-xs text-gray-500 hidden sm:block">Logged in as: <span class="user-email font-bold">...</span></span>
+            <!-- Added ID for event listener -->
+            <button id="logoutButton" class="bg-red-500 text-white text-xs font-bold px-3 py-1 rounded-lg hover:bg-red-600 transition">Logout</button>
+        </div>
+    </nav>
+
+    <main class="max-w-md mx-auto mt-8 p-4">
+        <div class="bg-white p-6 rounded-2xl shadow-lg border border-red-100">
+            <h2 class="text-2xl font-bold text-gray-800 mb-1">Activate Flare</h2>
+            <p class="text-gray-500 text-sm mb-6">This will anonymously alert verified allies.</p>
+
+            <label class="block text-xs font-bold uppercase text-gray-400 mb-1">Attack Type</label>
+            <select id="attackType" class="w-full bg-gray-50 border border-gray-200 p-3 rounded-lg mb-4 focus:outline-none focus:ring-2 focus:ring-red-500">
+                <option>Mass Trolling</option>
+                <option>Non-Consensual Images</option>
+                <option>Violent Threats</option>
+                <option>Doxxing</option>
+            </select>
+
+            <label class="block text-xs font-bold uppercase text-gray-400 mb-1">Link to Harassment</label>
+            <input id="harassmentLink" type="text" placeholder="Paste URL (Twitter/Insta/TikTok)" class="w-full bg-gray-50 border border-gray-200 p-3 rounded-lg mb-6 focus:outline-none focus:ring-2 focus:ring-red-500">
+
+            <!-- NEW: Victim Flare Status Display (Feature 2) -->
+            <div id="victimFlareStatus" class="mt-4 p-4 rounded-xl border border-blue-200 bg-blue-50 hidden">
+                <p class="text-sm font-semibold text-blue-800 mb-1">Your Active Flare Status:</p>
+                <div id="flareStatusDisplay" class="text-lg font-bold text-blue-600">No active flare.</div>
+                <div id="flareClaimedByDisplay" class="text-xs text-blue-700 mt-1"></div>
+            </div>
+            
+            <button id="sendFlareButton" class="panic-btn-active w-full bg-red-600 text-white font-bold py-4 rounded-xl text-lg shadow-lg hover:bg-red-700 transition mt-4">
+                BROADCAST SOS 📡
+            </button>
+            
+            <div id="statusMsg" class="text-center text-sm mt-4"></div>
+        </div>
+    </main>
+
+    <!-- LITERACY MODAL (Unchanged) -->
+    <div id="literacyModal" class="hidden fixed inset-0 bg-black bg-opacity-50 items-center justify-center p-4 z-50">
+        <div class="bg-white rounded-2xl max-w-sm w-full p-6 shadow-2xl animate-bounce-in">
+            <div class="text-center mb-4">
+                <span class="text-4xl">💡</span>
+                <h3 class="text-xl font-bold text-gray-800 mt-2">Safety Tip</h3>
+                <p class="text-gray-600 text-sm">While the community helps you...</p>
+            </div>
+            
+            <div class="bg-blue-50 p-4 rounded-lg border border-blue-100 mb-6">
+                <p class="text-blue-800 text-sm font-medium">Did you know?</p>
+                <p class="text-blue-700 text-xs mt-1">Taking screenshots helps create a legal paper trail. Even if they delete the post, your evidence remains.</p>
+            </div>
+
+            <!-- Added a close button for the modal -->
+            <button id="closeModalButton" class="block w-full bg-gray-300 text-gray-700 text-center py-3 rounded-lg font-bold mb-3">Close Tip</button>
+
+            <!-- Corrected link to index page -->
+            <a href="index.html" class="block w-full bg-gray-900 text-white text-center py-3 rounded-lg font-bold">Return to Hub</a>
+        </div>
+    </div>
+
+</body>
+</html>

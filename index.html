@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UmojaSafe | Digital Defense Network</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="css/style.css">
+    
+    <!-- Using a module script block to handle the imports and event listeners -->
+    <script type="module">
+        // Import handleAuth and checkAuth from the auth module
+        import { handleAuth, checkAuth } from './js/auth.js'; 
+
+        window.onload = () => {
+             // 1. Run the Auth check (nav UI updated inside checkAuth)
+             checkAuth(false);
+             
+             // 2. Attach Event Listeners to the buttons to run the imported functions
+             document.getElementById('signInButton').addEventListener('click', () => handleAuth(false));
+             document.getElementById('registerButton').addEventListener('click', () => handleAuth(true));
+        };
+    </script>
+</head>
+<body class="bg-gray-100 min-h-screen flex flex-col">
+
+    <!-- NEW: Sticky Navigation Bar -->
+    <nav class="bg-white shadow-md sticky top-0 z-20">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <!-- Logo/Title -->
+                <a href="index.html" class="flex items-center text-purple-700 text-2xl font-bold tracking-tight">
+                    🛡️ UmojaSafe
+                </a>
+                
+                <!-- Navigation Links -->
+                <div class="hidden md:flex space-x-6">
+                    <a href="index.html" class="text-gray-900 hover:text-purple-600 font-medium transition duration-150 border-b-2 border-purple-600 pb-1">Home</a>
+                    <a href="ally.html" class="text-gray-900 hover:text-purple-600 font-medium transition duration-150">Ally Feed</a>
+                    <a href="about.html" class="text-gray-900 hover:text-purple-600 font-medium transition duration-150">About</a>
+                    <a href="contact.html" class="text-gray-900 hover:text-purple-600 font-medium transition duration-150">Contact</a>
+                </div>
+
+                <!-- Action Button (Login/Register) - NEW ID for dynamic content -->
+                <div id="navActionContainer">
+                    <a href="#loginForm" class="bg-purple-600 text-white text-sm font-bold px-4 py-2 rounded-full hover:bg-purple-700 transition duration-150">
+                        Join Network
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- NEW: Hero Section -->
+    <header class="relative bg-purple-900 text-white pt-16 pb-24 md:py-32 overflow-hidden shadow-2xl">
+        <!-- Hero Background Image/Layer (Using placeholder for safety) -->
+        <div class="absolute inset-0 opacity-20" 
+             style="background-image: url('https://placehold.co/1200x600/6A0DAD/ffffff?text=Community+Defense+Network'); background-size: cover; background-position: center;">
+        </div>
+
+        <div class="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight mb-4">
+                Crowdsourced Digital Safety for African Women
+            </h1>
+            <p class="text-purple-200 text-lg sm:text-xl max-w-3xl mx-auto mb-8">
+                **UmojaSafe** connects victims of online violence with verified allies for real-time intervention and defense. We stand together.
+            </p>
+            <a href="#loginForm" class="bg-red-500 text-white font-bold py-3 px-8 rounded-full text-lg hover:bg-red-600 transition transform hover:scale-105 shadow-xl">
+                Activate Your Shield 🛡️
+            </a>
+        </div>
+    </header>
+
+    <!-- Login/Registration Form Section (Existing logic, placed lower on the page) -->
+    <div id="loginForm" class="flex-grow flex items-center justify-center w-full my-12 p-4"> 
+        
+        <div class="text-center max-w-sm w-full">
+            
+            <div class="bg-white p-8 rounded-2xl shadow-xl border border-gray-200">
+                <h2 class="text-2xl font-bold mb-2 tracking-tight text-gray-800">Community Access</h2>
+                <p class="text-gray-500 text-sm mb-6">Sign in or register to join the defense network.</p>
+
+                <input id="authEmail" type="email" placeholder="Email Address" class="w-full bg-gray-50 border border-gray-200 p-3 rounded-lg mb-4 focus:outline-none focus:ring-2 focus:ring-purple-500">
+                <input id="authPassword" type="password" placeholder="Password (min 6 characters)" class="w-full bg-gray-50 border border-gray-200 p-3 rounded-lg mb-6 focus:outline-none focus:ring-2 focus:ring-purple-500">
+                
+                <!-- Role Selection -->
+                <div class="mb-6">
+                    <label class="block text-xs font-bold uppercase text-gray-400 mb-2 text-left">Your Primary Role</label>
+                    <div class="flex space-x-4">
+                        <label class="flex items-center text-sm font-medium text-gray-700">
+                            <input type="radio" name="userRole" value="Ally" checked class="form-radio text-purple-600 focus:ring-purple-500">
+                            <span class="ml-2">Ally (Defender)</span>
+                        </label>
+                        <label class="flex items-center text-sm font-medium text-gray-700">
+                            <input type="radio" name="userRole" value="Victim" class="form-radio text-red-600 focus:ring-red-500">
+                            <span class="ml-2">Victim (Flare Sender)</span>
+                        </label>
+                    </div>
+                </div>
+                <!-- END Role Selection -->
+
+                <div class="space-y-3">
+                    <button id="signInButton" class="w-full bg-purple-600 text-white font-bold py-3 rounded-xl text-lg hover:bg-purple-700 transition">
+                        Sign In
+                    </button>
+                    <button id="registerButton" class="w-full bg-gray-200 text-gray-700 font-bold py-3 rounded-xl text-sm hover:bg-gray-300 transition">
+                        Register New User
+                    </button>
+                </div>
+
+                <div id="authStatus" class="text-sm mt-4"></div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="mt-auto bg-gray-800 text-center w-full text-gray-400 text-xs py-4">
+        &copy; 2025 UmojaSafe Defense Network. Empowering Digital Safety.
+    </footer>
+
+</body>
+</html>

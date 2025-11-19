@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About | UmojaSafe</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="css/style.css">
+    
+    <script type="module">
+        import { checkAuth } from './js/auth.js'; 
+
+        window.onload = () => {
+             // Check auth status to update nav UI
+             checkAuth(false);
+        };
+    </script>
+</head>
+<body class="bg-gray-100 min-h-screen flex flex-col">
+
+    <!-- Navigation Bar -->
+    <nav class="bg-white shadow-md sticky top-0 z-20">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <!-- Logo/Title -->
+                <a href="index.html" class="flex items-center text-purple-700 text-2xl font-bold tracking-tight">
+                    🛡️ UmojaSafe
+                </a>
+                
+                <!-- Navigation Links -->
+                <div class="hidden md:flex space-x-6">
+                    <a href="index.html" class="text-gray-900 hover:text-purple-600 font-medium transition duration-150">Home</a>
+                    <a href="ally.html" class="text-gray-900 hover:text-purple-600 font-medium transition duration-150">Ally Feed</a>
+                    <a href="about.html" class="text-purple-600 font-medium transition duration-150 border-b-2 border-purple-600 pb-1">About</a>
+                    <a href="contact.html" class="text-gray-900 hover:text-purple-600 font-medium transition duration-150">Contact</a>
+                </div>
+
+                <!-- Action Button - NEW ID for dynamic content -->
+                <div id="navActionContainer">
+                    <a href="index.html#loginForm" class="bg-purple-600 text-white text-sm font-bold px-4 py-2 rounded-full hover:bg-purple-700 transition duration-150">
+                        Join Network
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+    
+    <main class="max-w-4xl mx-auto p-8 flex-grow">
+        <div class="bg-white p-10 rounded-2xl shadow-xl border border-gray-200">
+            <h1 class="text-4xl font-extrabold text-gray-900 mb-4">Our Mission</h1>
+            <p class="text-lg text-gray-600 mb-8">UmojaSafe, meaning "Safe Unity" in Swahili, is dedicated to dismantling the structures of online violence targeting African women. We believe digital defense should be collaborative, immediate, and community-led.</p>
+
+            <h2 class="text-2xl font-bold text-gray-800 mb-3">How We Work</h2>
+            <div class="space-y-4 text-gray-700">
+                <p><strong>Real-Time Flares:</strong> Victims can instantly broadcast an SOS, sharing the exact link to the harassment.</p>
+                <p><strong>Ally Action:</strong> Verified allies receive these flares in real-time and commit to reporting the content, overwhelming the platform's moderation system for fast takedowns.</p>
+                <p><strong>Digital Literacy:</strong> We provide immediate, actionable safety tips to victims while the community steps in.</p>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="mt-auto bg-gray-800 text-center w-full text-gray-400 text-xs py-4">
+        &copy; 2025 UmojaSafe Defense Network. Empowering Digital Safety.
+    </footer>
+    
+</body>
+</html>

@@ -1,6 +1,6 @@
 # 🛡️ UmojaSafe Digital Defense Network
 
-**UmojaSafe** (Swahili for "Safe Unity") is a community-led, real-time crowdsourcing platform designed to combat targeted online violence, particularly against African women. It connects victims of online harassment with verified allies to coordinate rapid reporting and defense efforts.
+**UmojaSafe** (Swahili for "Safe Unity") is a community-led, real-time crowdsourcing platform designed to combat targeted online violence, particularly against African women. It connects victims of online harassment with verified allies to coordinate rapid reporting and defense efforts.  DEPLOYED..LIVE AT...........https://umoja-app-git-main-tonias-projects-bcbc801a.vercel.app/
 
 ---
 
